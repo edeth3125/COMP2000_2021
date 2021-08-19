@@ -1,18 +1,32 @@
-import javax.swing.*;
+
 import java.awt.*;
-public class Cell {
-    //Para
-    int Y;
-    int X;
+class Cell extends Rectangle {
+    // fields
     static int size = 35;
-    
-    //Contructor
-    public Cell(int y, int x){
-        Y = y;
-        X = x;
+
+    //constructors
+    public Cell(int x, int y){
+        super(x, y, size, size);
     }
 
-    public void drawCell(Graphics g) {
-        g.drawRect(X,Y, size, size);
+    //methods
+    void paint(Graphics g, Point mousePos){
+        if(contains(mousePos)){
+            g.setColor(Color.GRAY);
+        } else {
+            g.setColor(Color.WHITE);
+        }
+        g.fillRect(x,y,size,size);
+        g.setColor(Color.BLACK);
+        g.drawRect(x,y,size,size);
+    }
+
+    @Override
+    public boolean contains(Point p){
+        if (p != null){
+            return(super.contains(p));
+        } else {
+            return false;
+        }
     }
 }
